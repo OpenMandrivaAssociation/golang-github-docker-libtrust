@@ -6,11 +6,10 @@
 %global import_path     %{provider}.%{provider_tld}/%{project}/%{repo}
 %global commit          d273ef2565cab2fd9832b8a3d6320e5ab39ef9db
 %global shortcommit     %(c=%{commit}; echo ${c:0:7})
-%define gopath          %{_libdir}/golang
 
 Name:           golang-%{provider}-%{project}-%{repo}
 Version:        0
-Release:        0.1.git%{shortcommit}
+Release:        0.2.git%{shortcommit}
 Summary:        Library for managing authentication and authorization
 License:        ASL 2.0
 URL:            https://%{import_path}
@@ -66,15 +65,15 @@ of the graph for faster access.
 %build
 
 %install
-install -dp %{buildroot}%{gopath}/src/%{import_path}/trustgraph
-cp -rpav {*.go,trustgraph,testutil} %{buildroot}%{gopath}/src/%{import_path}/
+install -dp %{buildroot}%{go_dir}/src/%{import_path}/trustgraph
+cp -rpav {*.go,trustgraph,testutil} %{buildroot}%{go_dir}/src/%{import_path}/
 
 %files devel
 %doc CONTRIBUTING.md LICENSE MAINTAINERS README.md
-%dir %{gopath}/src/%{provider}.%{provider_tld}/%{project}
-%dir %{gopath}/src/%{import_path}
-%{gopath}/src/%{import_path}/*.go
-%dir %{gopath}/src/%{import_path}/trustgraph
-%{gopath}/src/%{import_path}/trustgraph/*.go
-%dir %{gopath}/src/%{import_path}/testutil
-%{gopath}/src/%{import_path}/testutil/*.go
+%dir %{go_dir}/src/%{provider}.%{provider_tld}/%{project}
+%dir %{go_dir}/src/%{import_path}
+%{go_dir}/src/%{import_path}/*.go
+%dir %{go_dir}/src/%{import_path}/trustgraph
+%{go_dir}/src/%{import_path}/trustgraph/*.go
+%dir %{go_dir}/src/%{import_path}/testutil
+%{go_dir}/src/%{import_path}/testutil/*.go
